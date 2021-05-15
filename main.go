@@ -24,7 +24,8 @@ var id int
 var usuarios map[int]Usuario
 
 func crearUsuario(){
-	fmt.Print("\nIngresa un nombre:")
+	fmt.Println("Crear usuario")
+	fmt.Print("Ingresa un nombre:")
 	nombre := leerTeclado()
 	fmt.Print("Ingresa un email:")
 	email := leerTeclado()
@@ -41,7 +42,12 @@ func crearUsuario(){
 	usuarios[id] = usuario
 }
 
-func listarUsuario() {}
+func listarUsuario() {
+	fmt.Println("Lista de usuarios")
+	for id, usuario := range usuarios{
+		fmt.Println("\nId:", id, "\nNombre:", usuario.nombre, "\nEmail:", usuario.email, "\nEdad:", usuario.edad)
+	}
+}
 
 func actualizarUsuario() {}
 
