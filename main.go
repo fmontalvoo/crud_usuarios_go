@@ -61,7 +61,23 @@ func limpiarConsola() {
 
 func actualizarUsuario() {}
 
-func eliminarUsuario() {}
+func eliminarUsuario() {
+	limpiarConsola()
+	fmt.Println("**Eliminar usuario**")
+	fmt.Print("Ingresa el Id del usuario:")
+	id, err := strconv.Atoi(leerTeclado())
+
+	if err != nil {
+		panic(err)
+	}
+
+	if _, ok := usuarios[id]; ok {
+		fmt.Println("Usuario:", usuarios[id].nombre, "Eliminado")
+		delete(usuarios, id)
+	} else {
+		fmt.Println("No existe un usuario con el id:", id )
+	}
+}
 
 func leerTeclado()string {
 
