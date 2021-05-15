@@ -52,14 +52,39 @@ func listarUsuario() {
 	}
 }
 
-// Funcion que ejecuta el comando `clear`.
-func limpiarConsola() {
-	cmd := exec.Command("clear")
-	cmd.Stdout = os.Stdout
-	cmd.Run()
-}
+func actualizarUsuario() {
+	limpiarConsola()
+	fmt.Println("**Actualizar usuario**")
 
-func actualizarUsuario() {}
+	fmt.Print("Ingresa el Id del usuario:")
+	id, err := strconv.Atoi(leerTeclado())
+
+	if err != nil {
+		panic(err)
+	}
+
+	if _, ok := usuarios[id]; ok {
+
+		fmt.Print("Ingresa un nombre:")
+		nombre := leerTeclado()
+		fmt.Print("Ingresa un email:")
+		email := leerTeclado()
+		fmt.Print("Ingresa una edad:")
+		edad, err := strconv.Atoi(leerTeclado())
+
+		if err != nil {
+			panic(err)
+		}
+
+		fmt.Println("Usuario:", usuarios[id].nombre, "Actualizado")
+		usuario := Usuario{id, nombre, email, edad}
+	
+		usuarios[id] = usuario
+	} else {
+		fmt.Println("No existe un usuario con el id:", id )
+	}
+
+}
 
 func eliminarUsuario() {
 	limpiarConsola()
@@ -89,6 +114,14 @@ func leerTeclado()string {
 		return strings.TrimSpace(opcion)
 	}
 
+}
+
+
+// Funcion que ejecuta el comando `clear`.
+func limpiarConsola() {
+	cmd := exec.Command("clear")
+	cmd.Stdout = os.Stdout
+	cmd.Run()
 }
 
 func main() {
