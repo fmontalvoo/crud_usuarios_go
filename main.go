@@ -6,6 +6,7 @@ import (
 	"bufio"
 	"strings"
 	"strconv"
+	"os/exec"
 )
 
 var reader *bufio.Reader
@@ -24,7 +25,8 @@ var id int
 var usuarios map[int]Usuario
 
 func crearUsuario(){
-	fmt.Println("Crear usuario")
+	limpiarConsola()
+	fmt.Println("**Crear usuario**")
 	fmt.Print("Ingresa un nombre:")
 	nombre := leerTeclado()
 	fmt.Print("Ingresa un email:")
@@ -43,10 +45,18 @@ func crearUsuario(){
 }
 
 func listarUsuario() {
-	fmt.Println("Lista de usuarios")
+	limpiarConsola()
+	fmt.Println("**Listar usuarios**")
 	for id, usuario := range usuarios{
 		fmt.Println("\nId:", id, "\nNombre:", usuario.nombre, "\nEmail:", usuario.email, "\nEdad:", usuario.edad)
 	}
+}
+
+// Funcion que ejecuta el comando `clear`.
+func limpiarConsola() {
+	cmd := exec.Command("clear")
+	cmd.Stdout = os.Stdout
+	cmd.Run()
 }
 
 func actualizarUsuario() {}
