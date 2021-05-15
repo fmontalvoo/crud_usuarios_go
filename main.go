@@ -5,11 +5,41 @@ import (
 	"fmt"
 	"bufio"
 	"strings"
+	"strconv"
 )
 
 var reader *bufio.Reader
 
-func crearUsuario(){}
+// Definicion de la estructura.
+type Usuario struct {
+	id int
+	nombre string
+	email string
+	edad int
+}
+
+var id int
+
+// Definicion del mapa.
+var usuarios map[int]Usuario
+
+func crearUsuario(){
+	fmt.Print("\nIngresa un nombre:")
+	nombre := leerTeclado()
+	fmt.Print("Ingresa un email:")
+	email := leerTeclado()
+	fmt.Print("Ingresa una edad:")
+	edad, err := strconv.Atoi(leerTeclado())
+
+	if err != nil {
+		panic(err)
+	}
+
+	id++
+	var usuario Usuario = Usuario{id, nombre, email, edad}
+
+	usuarios[id] = usuario
+}
 
 func listarUsuario() {}
 
@@ -33,10 +63,13 @@ func main() {
 
 	var opcion string
 
+	// Inicializamos el mapa.
+	usuarios = make(map[int]Usuario)
+
 	reader = bufio.NewReader(os.Stdin)
 
 	for {
-		fmt.Println("1. Crear")
+		fmt.Println("\n1. Crear")
 		fmt.Println("2. Listar")
 		fmt.Println("3. Actualizar")
 		fmt.Println("4. Eliminar")
